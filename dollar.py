@@ -45,7 +45,8 @@ letter_values = {
     'ú': 21,
     'ü': 21,
     'û': 21,
-    'ñ': 14
+    'ñ': 14,
+    ' ': 0
 }
 
 def get_value(letter):
