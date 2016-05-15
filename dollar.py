@@ -28,7 +28,22 @@ letter_values = {
     'x': 24,
     'y': 25,
     'z': 26,
-    '\n': 0
+    '\n': 0,
+    '\'': 0,
+    'â': 1,
+    'á': 1,
+    'ä': 1,
+    'ç': 3,
+    'é': 5,
+    'è': 5,
+    'í': 8,
+    'ó': 15,
+    'ö': 15,
+    'ô': 15,
+    'ú': 21,
+    'ü': 21,
+    'û': 21,
+    'ñ': 14
 }
 
 def get_value(letter):
@@ -43,7 +58,7 @@ group.add_argument('--value', dest='value', required=False)
 
 args = parser.parse_args()
 
-source = 'https://raw.githubusercontent.com/atebits/Words/master/Words/en.txt'
+source = 'https://raw.githubusercontent.com/medude/one-dollar-word/master/unix_words'
 target_score = 100
 
 if args.input:
@@ -53,12 +68,13 @@ if args.value:
     target_score = args.value
 
 all_words = urllib.request.urlopen(source).read()
+
 try:
     all_words = str(all_words, 'utf-8')
 except:
     all_words = str(all_words, 'ascii')
     
-all_words = all_words.split()
+all_words = all_words.lower().split()
 
 for word in all_words[:]:
     score = 0
@@ -70,7 +86,7 @@ for word in all_words[:]:
 if args.output:
     file = open(args.output, 'w')
     for word in all_words:
-        file.write(word)
+        file.write(word+'\n')
 else:
     for word in all_words:
         print(word)
